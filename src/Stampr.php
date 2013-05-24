@@ -1,5 +1,6 @@
 <?php
 
+require_once 'client/StamprApi.php';
 require_once 'models/StamprBatch.php';
 require_once 'models/StamprConfig.php';
 require_once 'models/StamprMailing.php';
@@ -8,9 +9,14 @@ class Stampr
 {
   protected $client = null;
 
-  public function __construct($client)
+  public static function Client($user, $password, $endpoint=null)
   {
-    $this->client = $client;
+    return new StamprApi($user, $password, $endpoint);
+  }
+
+  public function __construct($user, $password, $endpoint=null)
+  {
+    $this->client = self::Client($user, $password, $endpoint);
   }
 
   public function factory($type, $id=null)
