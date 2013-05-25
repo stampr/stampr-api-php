@@ -1,5 +1,27 @@
 {
-    "require": {
-        "guzzle/guzzle": "~3.1"
+  "name": "stampr/stampr-api-php",
+  "type": "library",
+  "description": "Use stampr's public RESTful API to send postal mail online.",
+  "keywords": [ "client", "rest", "api", "usps", "postal mail", "snail mail" ],
+  "homepage": "https://stam.pr/",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Cory Mawhorter",
+      "email": "cory@stam.pr",
+      "homepage": "https://stam.pr/"
     }
+  ],
+  "require": {
+    "guzzle/guzzle": "~3.1"
+  },
+  "autoload": {
+    "psr-0": {
+      "Stampr\\Tests": "tests/",
+      "Stampr": "src/"
+    }
+  },
+  "require-dev": {
+    "phpunit/phpunit": "3.7.*"
+  }
 }

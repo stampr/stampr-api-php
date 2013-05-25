@@ -1,8 +1,6 @@
 <?php
 
-require_once 'StamprModel.php';
-
-class StamprConfig extends StamprModel
+class StamprConfig extends StamprAbstractModel
 {
   const Type = StamprModelTypes::Config;
 
@@ -37,9 +35,26 @@ class StamprConfig extends StamprModel
     return $this->returnenvelope;
   }
 
+  public function verify()
+  {
+    // No verification needed except maybe ensuring settings are real, but meh, we'll leave that up to the user
+  }
+
   public function create()
   {
+    if (!is_null($this->getId())) throw new Exception('Stampr: Unable to create, already exists');
 
+    $this->verify();
+
+    $this->saveToResource('configs', array(
+        'size' => $this->getSize(),
+        'turnaround' => $this->getTurnaround(),
+        'style' => $this->getStyle(),
+        'output' => $this->getOutput(),
+        'returnenvelope' => $this->getReturnEnvelope(),
+      ));
+
+    return $this;
   }
 
   public function find($id=null)
@@ -49,22 +64,24 @@ class StamprConfig extends StamprModel
     return $this;
   }
 
-  public function findAll()
+  public function findAll($page=0)
   {
+    if (is_null($page)) $page = 0;
+    
+    $uri = 'configs/browse/all/'.$page;
 
-    return $this;
-  }
+    $results = array();
 
-  public function update()
-  {
+    $data = $this->client()->get($uri)->send()->json();
+    
+    foreach ($data as $json)
+    {
+      $obj = $this->parent->factory($this::Type);
+      $obj->import($json);
+      $results[] = $obj;
+    }
 
-    return $this;
-  }
-
-  public function delete()
-  {
-
-    return $this;
+    return $results;
   }
 }
 
