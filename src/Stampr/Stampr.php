@@ -1,5 +1,5 @@
 <?php
-require_once 'StamprClient.php';
+require_once 'Client/StamprClient.php';
 require_once 'Helpers/StamprUtils.php';
 require_once 'Models/StamprAbstractModel.php';
 require_once 'Models/StamprBatch.php';
