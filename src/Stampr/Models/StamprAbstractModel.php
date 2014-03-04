@@ -96,7 +96,6 @@ abstract class StamprAbstractModel
 
   public function create() { throw new Exception('Stampr: Unsupported action "create"'); }
   public function find($id=null) { throw new Exception('Stampr: Unsupported action "find"'); }
-  public function findAll($status=null, $start=null, $end=null, $page=0) { throw new Exception('Stampr: Unsupported action "findAll"'); }
   public function update() { throw new Exception('Stampr: Unsupported action "update"'); }
   public function delete() { throw new Exception('Stampr: Unsupported action "delete"'); }
 
